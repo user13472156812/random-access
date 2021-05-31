@@ -1,5 +1,5 @@
-#include <tree.hpp>
-#include <catch.hpp>
+#include "tree.hpp"
+#include <doctest.h>
 #include <algorithm>
 
 TEST_CASE("can iterate") {
@@ -37,6 +37,6 @@ TEST_CASE("operator-") {
 
 TEST_CASE("throws exception on illegal access request") {
   tree t{{{1, 2, 3}, 4, {5, 6, {7, 8, {nil, 9, 10}}}}};
-  CHECK_THROWS_AS(t.at(10), std::out_of_range);
-  CHECK_THROWS_AS(t.at(-1), std::out_of_range);
+  CHECK_THROWS_AS((void)t.at(10), std::out_of_range);
+  CHECK_THROWS_AS((void)t.at(-1), std::out_of_range);
 }
