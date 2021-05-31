@@ -9,15 +9,17 @@ struct tree_node {
   std::unique_ptr<tree_node> left{}, right{};
   int subtree_size = 1;
 
+  // Используется только для простого описания дерева в коде
   struct nullptr_node {};
 
+  // Правильнее бы этому конструктору быть explicit, хочется красиво дерево описывать
   tree_node(int val) : value(val) {}
-  tree_node(nullptr_node, int val, tree_node &&b)
+  tree_node(nullptr_node /*unused*/, int val, tree_node &&b)
       : value(val), left(nullptr),
         right(std::make_unique<tree_node>(std::move(b))) {
     right->up = this;
   }
-  tree_node(tree_node &&a, int val, nullptr_node)
+  tree_node(tree_node &&a, int val, nullptr_node /*unused*/)
       : value(val), left(std::make_unique<tree_node>(std::move(a))),
         right(nullptr) {
     left->up = this;
@@ -122,7 +124,7 @@ struct tree {
       : root(std::make_unique<tree_node>(std::move(a))) {
     root->up = nullptr;
   }
-  // И эти две функции тоже
+  // И эти две функции тоже нужно реализовать
   [[nodiscard]] iterator begin() const;
   [[nodiscard]] iterator end() const;
   // Эту функцию реализовать намного проще, чем operator+ и operator-
