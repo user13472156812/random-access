@@ -1,2 +1,5 @@
-include(${CMAKE_CURRENT_LIST_DIR}/../cmake/Tester.cmake)
-auto_tester(random-access tree.cpp test.cpp)
+cmake_minimum_required(VERSION 3.10.0)
+add_executable(random-access-test tree.cpp test.cpp)
+target_link_libraries(random-access-test PUBLIC doctest default)
+add_test(NAME random-access-test COMMAND random-access-test --force-colors -d)
+add_custom_target(cloud-test COMMAND random-access-test --force-colors -d)
