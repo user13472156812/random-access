@@ -136,7 +136,7 @@ struct tree {
     [[nodiscard]] iterator end() const;
     // Эту функцию реализовать намного проще, чем operator+ и operator-
     // Можете для разминки реализовать её напрямую, а потом уже приступать к
-    // более сложной части
+    // более сложной части...
     [[nodiscard]] int operator[](ptrdiff_t idx) const { return begin()[idx]; }
     [[nodiscard]] int const &at(ptrdiff_t idx) const {
         return (begin() + idx).at();
